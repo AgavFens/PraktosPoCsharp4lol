@@ -1,0 +1,48 @@
+﻿<Window x:Class="PraktosPoCsharp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PraktosPoCsharp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="43*"/>
+            <RowDefinition Height="309*"/>
+            <RowDefinition Height="43*"/>
+            <RowDefinition Height="39*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="PapkaSmuzikoy" Grid.Column="0" Click="PapkaSmuzikoy_Click">Открыть папку с музыкой</Button>
+            <Button x:Name="IstoriyaProslushivaniya" Grid.Column="1">История прослушивания</Button>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="28*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="90*"/>
+                <ColumnDefinition Width="90*"/>
+                <ColumnDefinition Width="90*"/>
+                <ColumnDefinition Width="21*"/>
+                <ColumnDefinition Width="90*"/>
+                <ColumnDefinition Width="90*"/>
+                <ColumnDefinition Width="200*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="NazadKnopka" Grid.Column="0" Click="NazadKnopka_Click">Назад</Button>
+            <Button x:Name="Playknopka" Grid.Column="1" Click="Playknopka_Button_Click">Стоп</Button>
+            <Button x:Name="VperedKnopka" Grid.Column="2" Click="VperedKnopka_Click">Вперед</Button>
+            <Button Grid.Column="4">Повтор</Button>
+            <Button Grid.Column="5">Случайно</Button>
+            <Slider x:Name="Slider_Zvuka" Grid.Column="6" Margin="25, 10, 25, 10" ValueChanged="Slider_Zvuka_ValueChanged"></Slider>
+        </Grid>
+        <MediaElement x:Name="MediaElement" LoadedBehavior="Manual" MediaOpened="MediaElement_MediaOpened"/>
+        <Slider x:Name="Slider" Grid.Row="2" Margin="0, 10, 0, 10" ValueChanged="Slider_ValueChanged"/>
+        <ListBox x:Name="ListBoxMuzika" Grid.Row="1" SelectionChanged="ListBoxMuzika_SelectionChanged"/>
+    </Grid>
+</Window>
