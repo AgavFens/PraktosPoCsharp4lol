@@ -19,7 +19,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button x:Name="PapkaSmuzikoy" Grid.Column="0" Click="PapkaSmuzikoy_Click">Открыть папку с музыкой</Button>
-            <Button x:Name="IstoriyaProslushivaniya" Grid.Column="1">История прослушивания</Button>
+            <Button x:Name="IstoriyaProslushivaniya" Grid.Column="1" Click="IstoriyaProslushivaniya_Click">История прослушивания</Button>
         </Grid>
         <Grid Grid.Row="3">
             <Grid.RowDefinitions>
@@ -37,11 +37,10 @@
             <Button x:Name="NazadKnopka" Grid.Column="0" Click="NazadKnopka_Click">Назад</Button>
             <Button x:Name="Playknopka" Grid.Column="1" Click="Playknopka_Button_Click">Стоп</Button>
             <Button x:Name="VperedKnopka" Grid.Column="2" Click="VperedKnopka_Click">Вперед</Button>
-            <Button Grid.Column="4">Повтор</Button>
-            <Button Grid.Column="5">Случайно</Button>
+            <Button x:Name="Knopkapovtor" Grid.Column="4" Click="Knopkapovtor_Click">Повтор</Button>
+            <Button x:Name="KnopkaRandom" Grid.Column="5" Click="KnopkaRandom_Click">Случайно</Button>
             <Slider x:Name="Slider_Zvuka" Grid.Column="6" Margin="25, 10, 25, 10" ValueChanged="Slider_Zvuka_ValueChanged"></Slider>
         </Grid>
-        <MediaElement x:Name="MediaElement" LoadedBehavior="Manual" MediaOpened="MediaElement_MediaOpened"/>
         <Slider x:Name="Slider" Grid.Row="2" Margin="0, 10, 0, 10" ValueChanged="Slider_ValueChanged"/>
         <ListBox x:Name="ListBoxMuzika" Grid.Row="1" SelectionChanged="ListBoxMuzika_SelectionChanged"/>
     </Grid>

@@ -1,0 +1,17 @@
+﻿<Window x:Class="PraktosPoCsharp.Yapidoras"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PraktosPoCsharp"
+        mc:Ignorable="d"
+        Title="Yapidoras" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="177*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" HorizontalAlignment="Center">История прослушивания</Label>
+        <ListBox x:Name="ListBoxProshlushka" Grid.Row="1"/>
+    </Grid>
+</Window>

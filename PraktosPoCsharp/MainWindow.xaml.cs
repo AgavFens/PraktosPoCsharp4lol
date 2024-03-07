@@ -18,15 +18,44 @@ namespace PraktosPoCsharp
 {
     public partial class MainWindow : Window
     {
-        List<string> muzikaList = new List<string>();
-        MediaPlayer mediaplayer = new MediaPlayer();
         List<string> files;
+        List<string> muzikaList = new List<string>();
+        List<string> yapidorasNyork = new List<string>();
+        MediaPlayer mediaplayer = new MediaPlayer();
         int selectedIndex;
+        string Povtor = "Не повтор";
         public MainWindow()
         {
             InitializeComponent();
+            mediaplayer.MediaEnded += NextSong;
         }
+        private void NextSong(object sender, EventArgs e)
+        {
+            if(Povtor == "Не повтор")
+            {
+                if (mediaplayer.NaturalDuration.HasTimeSpan && selectedIndex + 1 < files.Count)
+                {
+                    selectedIndex += 1;
+                    mediaplayer.Open(new Uri(files[selectedIndex]));
+                    mediaplayer.Play();
+                    yapidorasNyork.Add(muzikaList[selectedIndex]);
 
+                }
+                else if (selectedIndex + 1 == files.Count)
+                {
+                    selectedIndex = 0;
+                    mediaplayer.Open(new Uri(files[selectedIndex]));
+                    mediaplayer.Play();
+                    yapidorasNyork.Add(muzikaList[selectedIndex]);
+                }
+            }
+            else
+            {
+                mediaplayer.Open(new Uri(files[selectedIndex]));
+                mediaplayer.Play();
+                yapidorasNyork.Add(muzikaList[selectedIndex]);
+            }
+        }
         private void PapkaSmuzikoy_Click(object sender, RoutedEventArgs e)
         {
             mediaplayer.Volume = Slider_Zvuka.Value;
@@ -53,7 +82,6 @@ namespace PraktosPoCsharp
             }
         }
 
-
         private void ListBoxMuzika_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ListBoxMuzika.SelectedItem != null)
@@ -66,12 +94,9 @@ namespace PraktosPoCsharp
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            Slider.Maximum = mediaplayer.NaturalDuration.TimeSpan.Ticks;
             mediaplayer.Position = new TimeSpan(Convert.ToInt64(Slider.Value));
 
-        }
-        private void MediaElement_MediaOpened(object sender, RoutedEventArgs e)
-        {
-            Slider.Maximum = mediaplayer.NaturalDuration.TimeSpan.Ticks;
         }
 
         private void Slider_Zvuka_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -87,6 +112,7 @@ namespace PraktosPoCsharp
                 selectedIndex -= 1;
                 mediaplayer.Open(new Uri(files[selectedIndex]));
                 mediaplayer.Play();
+                yapidorasNyork.Add(muzikaList[selectedIndex]);
             }
         }
 
@@ -97,15 +123,17 @@ namespace PraktosPoCsharp
                 selectedIndex += 1;
                 mediaplayer.Open(new Uri(files[selectedIndex]));
                 mediaplayer.Play();
+                yapidorasNyork.Add(muzikaList[selectedIndex]);
+
             }
             else if (selectedIndex + 1 == files.Count)
             {
                 selectedIndex = 0;
                 mediaplayer.Open(new Uri(files[selectedIndex]));
                 mediaplayer.Play();
+                yapidorasNyork.Add(muzikaList[selectedIndex]);
             }
         }
-
 
         private void Playknopka_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -120,7 +148,40 @@ namespace PraktosPoCsharp
             {
                 button.Content = "Играть";
                 mediaplayer.Pause();
+
             }
+        }
+
+        private void KnopkaRandom_Click(object sender, RoutedEventArgs e)
+        {
+            if (files != null && files.Count > 0)
+            {
+                Random random = new Random();
+                int randomIndex = random.Next(0, files.Count);
+                selectedIndex = randomIndex;
+                mediaplayer.Open(new Uri(files[selectedIndex]));
+                mediaplayer.Play();
+                yapidorasNyork.Add(muzikaList[selectedIndex]);
+
+            }
+        }
+        private void Knopkapovtor_Click(object sender, RoutedEventArgs e)
+        {
+            if (Povtor == "Не повтор")
+            {
+                Povtor = "Повтор";
+            }
+            else
+            {
+                Povtor = "Не повтор";
+            }
+        }
+
+        private void IstoriyaProslushivaniya_Click(object sender, RoutedEventArgs e)
+        {
+            Yapidoras yapidoras = new Yapidoras(yapidorasNyork);
+            yapidoras.Show();
+            
         }
     }
 }
